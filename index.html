@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#11100e">
+  <meta name="description" content="Kantin Kontainer FAKDA - pesan makanan dan minuman dengan mudah.">
+  <title>Kantin Kontainer FAKDA | Pesan Menu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="overlay" class="overlay"></div>
+
+  <nav id="navbar" class="navbar">
+    <a class="logo" href="#home" aria-label="Kantin Kontainer FAKDA">Kantin <span>Kontainer</span></a>
+    <div class="desktop-nav" aria-label="Navigasi utama">
+      <a href="#home">Home</a><a href="#menu">Menu</a><a href="#lokasi">Lokasi</a><a href="#tentang">Tentang</a>
+      <button id="navCartBtn" class="nav-cart" type="button" aria-label="Buka keranjang">🛒 <span id="navCartCount">0</span></button>
+      <button id="themeToggle" class="icon-btn" type="button" aria-label="Ganti tema">☀️</button>
+    </div>
+    <div class="mobile-nav">
+      <button id="themeToggleMobile" class="icon-btn" type="button" aria-label="Ganti tema">☀️</button>
+      <button id="hamburgerBtn" class="hamburger" type="button" aria-label="Buka menu navigasi">☰</button>
+    </div>
+  </nav>
+
+  <aside id="sidebar" class="sidebar" aria-label="Menu navigasi">
+    <button id="closeSidebar" class="close-btn" type="button" aria-label="Tutup menu">&times;</button>
+    <div class="sidebar-brand"><span>KK</span><div><strong>Kantin Kontainer</strong><small>FAKDA</small></div></div>
+    <nav class="side-links">
+      <a href="#home">⌂ Home</a><a href="#menu">🍴 Menu</a><a href="#lokasi">📍 Lokasi</a><a href="#tentang">ℹ Tentang</a>
+    </nav>
+    <div class="sidebar-section">
+      <h3>Kategori</h3>
+      <button class="side-category active" data-kategori="Semua">Semua Menu</button>
+      <button class="side-category" data-kategori="Makanan">🍚 Makanan</button>
+      <button class="side-category" data-kategori="Minuman">🥤 Minuman</button>
+      <button class="side-category" data-kategori="Cemilan">🍿 Cemilan</button>
+    </div>
+    <button id="complaintSideBtn" class="btn-outline" type="button">💬 Kritik & Saran</button>
+  </aside>
+
+  <header id="home" class="hero reveal">
+    <div class="hero-glow"></div>
+    <div class="floating-doodles" aria-hidden="true"><span>☕</span><span>🍡</span><span>🍞</span><span>🥤</span></div>
+    <div class="hero-inner">
+      <div class="eyebrow"><span class="live-dot"></span><span id="heroStatus">Mengecek jam...</span></div>
+      <p class="hero-kicker">KANTIN CONTAINER FAKDA</p>
+      <h1>Teman makan santai,<br><em>pilihan menu beragam.</em></h1>
+      <p class="hero-copy">Cari menu favoritmu, atur pesanan, lalu checkout dalam beberapa langkah.</p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#menu">🍴 Lihat Menu</a>
+        <button class="btn-secondary" id="heroOrderBtn" type="button">🛒 Pesan Sekarang</button>
+      </div>
+      <div class="hero-meta">
+        <span>⏰ Senin–Sabtu • 08.00–17.00</span><span>📍 Depan FAKDA</span><span id="heroOpenLabel">Buka sekarang</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="quick-info container reveal" aria-label="Informasi singkat">
+      <div><span class="info-icon">📍</span><div><small>Lokasi</small><strong>Depan FAKDA</strong></div></div>
+      <div><span class="info-icon">⏰</span><div><small>Jam Operasional</small><strong>08.00 – 17.00</strong></div></div>
+      <div><span class="info-icon">💬</span><div><small>Pesan via</small><strong>WhatsApp</strong></div></div>
+    </section>
+
+    <section id="menu" class="menu-section container">
+      <div class="section-heading reveal"><div><span class="section-label">OUR MENU</span><h2>Pilih yang kamu suka.</h2></div><p>Pesan sekarang, kami siapkan untukmu.</p></div>
+      <div class="controls reveal">
+        <label class="search-box" for="searchInput"><span>⌕</span><input id="searchInput" type="search" placeholder="Cari makanan atau minuman..." autocomplete="off"><kbd>Ctrl K</kbd></label>
+        <div id="categoryChips" class="category-chips" aria-label="Kategori menu">
+          <button class="category-chip active" data-kategori="Semua" type="button">Semua <span id="countSemua">0</span></button>
+          <button class="category-chip" data-kategori="Makanan" type="button">🍚 Makanan <span id="countMakanan">0</span></button>
+          <button class="category-chip" data-kategori="Minuman" type="button">🥤 Minuman <span id="countMinuman">0</span></button>
+          <button class="category-chip" data-kategori="Cemilan" type="button">🍿 Cemilan <span id="countCemilan">0</span></button>
+        </div>
+      </div>
+
+      <div id="popularSection" class="popular-section reveal">
+        <div class="mini-heading"><span>🔥</span><div><h3>Menu Favorit</h3><small>Pilihan yang paling sering dicari</small></div></div>
+        <div id="popularContainer" class="popular-grid"></div>
+      </div>
+
+      <div class="menu-layout">
+        <section>
+          <div class="result-head"><h3 id="menuTitle">Semua Menu</h3><span id="resultCount">0 menu</span></div>
+          <div id="menuContainer" class="menu-grid"></div>
+          <div id="emptyState" class="empty-state" hidden><div>😕</div><h3>Menu tidak ditemukan</h3><p>Periksa kata kunci atau pilih kategori lain.</p><button class="btn-outline small" id="resetFilterBtn" type="button">Reset Pencarian</button></div>
+        </section>
+
+        <aside id="cartSection" class="cart-section" aria-label="Keranjang pesanan">
+          <div class="cart-head"><div><span class="section-label">PESANAN</span><h2>Keranjang</h2></div><button id="closeCartBtn" class="close-btn mobile-only" type="button" aria-label="Tutup keranjang">&times;</button></div>
+          <div id="cartItems" class="cart-items"></div>
+          <div id="cartEmpty" class="cart-empty"><div>🛒</div><strong>Keranjang masih kosong</strong><p>Yuk pilih menu favoritmu.</p><a href="#menu" class="btn-outline small">Lihat Menu</a></div>
+          <div id="cartSummary" class="cart-summary">
+            <div><span>Jumlah item</span><strong id="cartItemCount">0 item</strong></div>
+            <div class="total-row"><span>Total</span><strong id="totalPrice">Rp0</strong></div>
+            <button id="checkoutBtn" class="btn-primary full" type="button">Lanjut ke Checkout <span>→</span></button>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="lokasi" class="location-section container reveal">
+      <div class="location-card">
+        <div class="location-copy"><span class="section-label">FIND US</span><h2>Temui kami di kantin.</h2><p>📍 <strong>Kantin Kontainer FAKDA</strong><br>Dekat Lapangan Voli, Depan FAKDA.</p><div class="location-status"><span class="status-dot"></span><strong id="locationStatus">Mengecek status...</strong><span>• Senin–Sabtu, 08.00–17.00</span></div><a id="mapsLink" class="btn-primary" href="https://maps.app.goo.gl/aJ2f7ZVZSTY5m1yw5" target="_blank" rel="noopener noreferrer">📍 Buka Google Maps</a></div>
+        <div class="map-preview" aria-label="Pratinjau lokasi">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3957.3956405887234!2d110.478679!3d-7.309372!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zN8KwMTgnMzMuNyJTIDExMMKwMjgnNDMuMiJF!5e0!3m2!1sid!2sid!4v1790756520591!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+</div>
+
+      </div>
+    </section>
+
+    <section id="tentang" class="about-section container reveal">
+      <div><span class="section-label">ABOUT</span><h2>Pesan tanpa ribet.</h2><p>Website ini dibuat sebagai mini food-ordering app statis untuk membantu pelanggan melihat menu, mengatur keranjang, memilih pembayaran, dan mengirim detail pesanan melalui WhatsApp.</p></div>
+      <div class="feature-list"><div><b>01</b><span><strong>Pilih menu</strong><small>Search & filter real-time.</small></span></div><div><b>02</b><span><strong>Atur pesanan</strong><small>Quantity & total otomatis.</small></span></div><div><b>03</b><span><strong>Checkout</strong><small>Cash atau QRIS dengan konfirmasi.</small></span></div></div>
+    </section>
+
+    <section class="feedback-section container reveal"><div class="feedback-card"><div><span class="section-label">YOUR VOICE MATTERS</span><h2>Punya saran?</h2><p>Bantu kami membuat Kantin FAKDA menjadi lebih baik.</p></div><button id="complaintBtn" class="btn-primary" type="button">💬 Kirim Kritik & Saran</button></div></section>
+  </main>
+
+  <footer><div class="container footer-inner"><div><div class="logo">Kantin <span>Kontainer</span></div><p>Teman makan santai, pilihan menu beragam.</p></div><div class="footer-info"><span>📍 Depan FAKDA</span><span>⏰ 08.00–17.00</span><span>💬 WhatsApp</span></div></div><div class="container copyright">© 2026 Kantin Kontainer FAKDA • Static Web App</div></footer>
+
+  <button id="floatingCartBtn" class="floating-cart" type="button" aria-label="Buka keranjang"><span>🛒</span><span><b id="floatingCartCount">0</b> item</span><strong id="floatingCartTotal">Rp0</strong></button>
+  <button id="backToTop" class="back-top" type="button" aria-label="Kembali ke atas">↑</button>
+  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+  <div id="paymentModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle" hidden>
+    <div class="modal-content checkout-modal">
+      <button id="closeModal" class="modal-close" type="button" aria-label="Tutup checkout">&times;</button>
+      <div class="checkout-steps"><div class="step active" data-step="1"><b>01</b><span>Keranjang</span></div><i></i><div class="step" data-step="2"><b>02</b><span>Pembayaran</span></div><i></i><div class="step" data-step="3"><b>03</b><span>Konfirmasi</span></div><i></i><div class="step" data-step="4"><b>04</b><span>Selesai</span></div></div>
+
+      <section id="checkoutSummarySection" class="checkout-panel">
+        <span class="section-label">CHECKOUT</span><h2 id="checkoutTitle">Periksa pesananmu.</h2><div id="checkoutItems" class="checkout-items"></div><div class="checkout-total"><span>Total</span><strong id="modalTotalTagihan">Rp0</strong></div><button id="toPaymentBtn" class="btn-primary full" type="button">Lanjutkan Pembayaran →</button>
+      </section>
+
+      <section id="methodSection" class="checkout-panel" hidden>
+        <span class="section-label">STEP 02</span><h2>Pilih Metode Pembayaran</h2><p class="muted">Total pembayaran <strong id="paymentTotal">Rp0</strong></p>
+        <div class="payment-options">
+          <button class="payment-card" data-method="Cash" type="button"><span class="payment-icon">💵</span><span><strong>Tunai</strong><small>Bayar langsung di kasir</small></span><span class="radio"></span></button>
+          <button class="payment-card" data-method="QRIS" type="button"><span class="payment-icon">📱</span><span><strong>QRIS</strong><small>Scan QR untuk membayar</small></span><span class="radio"></span></button>
+        </div>
+        <button id="continuePaymentBtn" class="btn-primary full" type="button" disabled>Lanjutkan Pembayaran →</button><button class="btn-text" data-back="summary" type="button">← Kembali</button>
+      </section>
+
+      <section id="cashSection" class="checkout-panel" hidden>
+        <span class="section-label">PEMBAYARAN TUNAI</span><div class="big-payment-icon">💵</div><h2>Bayar langsung di kasir.</h2><div class="amount-box"><small>Total yang harus dibayar</small><strong id="cashTotal">Rp0</strong></div><p>Silakan lakukan pembayaran langsung kepada kasir. Setelah itu konfirmasi pesanan di bawah.</p><button id="cashConfirmBtn" class="btn-primary full" type="button">✓ Konfirmasi Pesanan</button><button class="btn-text" data-back="payment" type="button">← Ganti metode</button>
+      </section>
+
+      <section id="qrisSection" class="checkout-panel" hidden>
+        <span class="section-label">PEMBAYARAN QRIS</span><h2>Scan QRIS untuk membayar.</h2><div class="qris-frame"><img src="Qris.jpeg" alt="Kode QRIS pembayaran Kantin FAKDA" class="qris-img"></div><div class="amount-box"><small>Total yang harus dibayar</small><strong id="qrisTotal">Rp0</strong></div><p class="warning">⚠ Pastikan nominal pembayaran sesuai dengan total pesanan.</p><button id="qrisConfirmBtn" class="btn-primary full" type="button">✓ Saya Sudah Membayar</button><button class="btn-text" data-back="payment" type="button">← Ganti metode</button>
+      </section>
+
+      <section id="confirmSection" class="checkout-panel" hidden>
+        <span class="section-label">STEP 03</span><h2>Konfirmasi Pesanan</h2><div id="confirmItems" class="checkout-items"></div><div class="confirm-total"><span>Total</span><strong id="confirmTotal">Rp0</strong></div><div class="selected-method">Pembayaran: <strong id="confirmMethod">-</strong></div><button id="finalConfirmBtn" class="btn-primary full" type="button">✓ Konfirmasi Pesanan</button><button class="btn-text" data-back="payment" type="button">← Kembali</button>
+      </section>
+
+      <section id="receiptSection" class="checkout-panel" hidden>
+        <div class="success-mark">✓</div><span class="section-label">STEP 04 • SELESAI</span><h2>Pesanan berhasil dibuat!</h2><div id="receiptContent" class="thermal-receipt"></div><div class="receipt-actions"><button id="sendWhatsAppBtn" class="btn-primary full" type="button">💬 Kirim Detail ke WhatsApp</button><button id="finishBtn" class="btn-text" type="button">Tutup & Selesai</button></div>
+      </section>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
